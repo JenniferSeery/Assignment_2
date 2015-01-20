@@ -1,4 +1,4 @@
-RedSq rs1;
+RedSq rs1,rs2;
 
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
@@ -12,8 +12,9 @@ PVector Slocation;
 PVector Svelocity;
 
 //Number of Red Squares and filling the red square array
-int redSQ = 3;
+int redSQ = 2;
 RedSq[] RedSqArr= new RedSq[redSQ];
+RedSq[] RedSqArr2= new RedSq[redSQ];
 
 void setup()
 {
@@ -31,6 +32,11 @@ void setup()
   {
     RedSqArr[i] = new RedSq(); // Create each object
     rs1 = new RedSq();
+  }
+  for (int i = 0; i < RedSqArr2.length; i++) 
+  {
+    RedSqArr2[i] = new RedSq(); // Create each object
+    rs2 = new RedSq();
   }
 
 }
@@ -92,7 +98,12 @@ void draw()
   
   for (int i = 0; i < RedSqArr.length; i++) 
   {
-    RedSqArr[i].fall();
+    RedSqArr[i].falldown();
+  }
+  
+  for (int i = 0; i < RedSqArr2.length; i++) 
+  {
+    RedSqArr2[i].fallacross();
   }
 
 }
