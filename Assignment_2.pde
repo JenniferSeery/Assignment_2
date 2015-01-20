@@ -1,45 +1,64 @@
+RedSq rs1;
+
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
+
+// Vectors for the Circle 
 PVector Clocation;
 PVector Cvelocity;
+
+//Vectors for the Square
 PVector Slocation;
 PVector Svelocity;
 
+//Number of Red Squares and filling the red square array
+int redSQ = 3;
+RedSq[] RedSqArr= new RedSq[redSQ];
 
 void setup()
 {
   size(1000, 600);
-  setUpPlayerControllers();
   smooth();
-  background(255);
+  setUpPlayerControllers();
+  
+  //Initalizing the PVectors 
   Clocation = new PVector(100,100);
   Cvelocity = new PVector(1.5,1.5);
   Slocation = new PVector(0,150);
   Svelocity = new PVector(1.5,1.5);
+  
+  for (int i = 0; i < RedSqArr.length; i++) 
+  {
+    RedSqArr[i] = new RedSq(); // Create each object
+    rs1 = new RedSq();
+  }
+
 }
 
 void draw()
 {
- background(0);
-  for(Player player:players)
-  {
-    player.update();
-    player.display();
-  }
-  
+   background(0);
+   for(Player player:players)
+    {
+      player.update();
+      player.display();
+    }
   noStroke();
   fill(255,10);
-  //rect(0,0,width,height);
   
-  // Add the current speed to the location.
+  // Add the circles current speed to the circles location.
   Clocation.add(Cvelocity);
 
   // We still sometimes need to refer to the individual components of a PVector 
   // and can do so using the dot syntax (location.x, velocity.y, etc.)
-  if ((Clocation.x > width) || (Clocation.x < 0)) {
+  //X Co-ordinates 
+  if ((Clocation.x > width) || (Clocation.x < 0)) 
+  {
     Cvelocity.x = Cvelocity.x * -1;
   }
-  if ((Clocation.y > height) || (Clocation.y < 0)) {
+  // Y Co ordinates 
+  if ((Clocation.y > height) || (Clocation.y < 0)) 
+  {
     Cvelocity.y = Cvelocity.y * -1;
   }
 
@@ -47,27 +66,35 @@ void draw()
   stroke(0);
   fill(175);
   ellipse(Clocation.x,Clocation.y,50,50);
-  
-   noStroke();
+  noStroke();
   fill(255,10);
-  //rect(0,0,width,height);
   
-  // Add the current speed to the location.
+// Add the squares current speed to the sqaures location.
   Slocation.add(Svelocity);
 
   // We still sometimes need to refer to the individual components of a PVector 
   // and can do so using the dot syntax (location.x, velocity.y, etc.)
-  if ((Slocation.x > width) || (Slocation.x < 0)) {
+  // X ordinates
+  if ((Slocation.x > width) || (Slocation.x < 0))
+  {
     Svelocity.x = Svelocity.x * -1;
   }
-  if ((Slocation.y > height) || (Slocation.y < 0)) {
+  // Y Co ordinates 
+  if ((Slocation.y > height) || (Slocation.y < 0)) 
+  {
     Svelocity.y = Svelocity.y * -1;
   }
 
-  // Display circle at x location
+  // Display Sqaures at x location
   stroke(0);
   fill(175);
   rect(Slocation.x,Slocation.y,50,50);
+  
+  for (int i = 0; i < RedSqArr.length; i++) 
+  {
+    RedSqArr[i].fall();
+  }
+
 }
 
 void keyPressed()
