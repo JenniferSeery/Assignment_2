@@ -1,4 +1,4 @@
-class RedSq
+class BlueSq
 {
   float  x= random(width);
   float  y= random(height,2*height);
@@ -8,7 +8,7 @@ class RedSq
 void falldown() 
 {  
       y-= 5;
-      stroke(255,0,0);
+      stroke(0,0,255);
       rect(x, y, 20, 20);
       fill(0);
 
@@ -26,7 +26,7 @@ void falldown()
   void fallacross()
   {     
       x1 -= 5;
-      stroke(255,0,0);
+      stroke(0,0,255);
       rect(x1, y1, 20, 20);
       fill(0);
 

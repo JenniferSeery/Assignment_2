@@ -84,6 +84,6 @@ class Player
     stroke(255);
     fill(0);    
     ellipse(pos.x, pos.y, 20, 20);
-      }  
+  }  
 }
 

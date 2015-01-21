@@ -1,4 +1,4 @@
-class RedSq
+class RedCir
 {
   float  x= random(width);
   float  y= random(height,2*height);
@@ -9,7 +9,7 @@ void falldown()
 {  
       y-= 5;
       stroke(255,0,0);
-      rect(x, y, 20, 20);
+      ellipse(x, y, 20, 20);
       fill(0);
 
      if(y<0)
@@ -27,7 +27,7 @@ void falldown()
   {     
       x1 -= 5;
       stroke(255,0,0);
-      rect(x1, y1, 20, 20);
+      ellipse(x1, y1, 20, 20);
       fill(0);
 
      if(x1<0)
