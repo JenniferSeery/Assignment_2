@@ -15,6 +15,13 @@ PVector Cvelocity;
 PVector Slocation;
 PVector Svelocity;
 
+//IMAGES
+PImage PlayerSq;
+
+int Slives=500;
+int Clives=500;
+
+
 //Number of Red Squares and filling the red square array
 int redSQ = 2;
 RedSq[] RedSqArr= new RedSq[redSQ];
@@ -35,13 +42,39 @@ int blueCIR = 2;
 BlueCir[] BlueCirArr= new BlueCir[blueCIR];
 BlueCir[] BlueCirArr2= new BlueCir[blueCIR];
 
+//SIZING OF SCREEN
+boolean devMode = false;
+boolean sketchFullScreen() 
+{
+  return ! devMode;
+}
 
+//MUSIC
+import ddf.minim.*;
+import ddf.minim.signals.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*; 
+Minim minim;
+AudioPlayer player;
+AudioInput input; 
 
 void setup()
 {
-  size(1000, 600);
+  
+  if (devMode)
+  {
+    size(800, 600);
+  }
+  else
+  {
+    size(displayWidth, displayHeight);
+  }
+  
+ // size(1000, 600);
   smooth();
   setUpPlayerControllers();
+  
+  //PlayerSq = loadImage("Square.png");
   
   //Initalizing the PVectors 
   Clocation = new PVector(100,100);
@@ -102,6 +135,12 @@ void setup()
     BlueCirArr2[i] = new BlueCir(); // Create each object
     bc2 = new BlueCir();
   }
+  
+    // MUSIC 
+    minim = new Minim(this);
+    player = minim.loadFile("Sandstorm.mp3");
+    input = minim.getLineIn();
+    player.play();
 
 }
 
@@ -198,6 +237,8 @@ void draw()
   {
     BlueCirArr2[i].fallacross();
   }
+  
+   
 
 }
 
@@ -244,6 +285,7 @@ void setUpPlayerControllers()
   XML xml = loadXML("arcade.xml");
   XML[] children = xml.getChildren("player");
   int gap = width / (children.length + 1);
+  int y=300;
   
   for(int i = 0 ; i < children.length ; i ++)  
   {
@@ -253,9 +295,19 @@ void setUpPlayerControllers()
             , color(random(0, 255), random(0, 255), random(0, 255))
             , playerXML);
     int x = (i + 1) * gap;
+    if(i == 0)
+    {
+      p.playerimage = loadImage("Sqaure.png");
+    }
+    if(i == 1)
+    {
+      p.playerimage=loadImage("Circle.png");
+    }
+    
     p.pos.x = x;
-    p.pos.y = 300;
-   players.add(p);         
-  }
+    p.pos.y = y;
+   players.add(p); 
+}
+
 }
 

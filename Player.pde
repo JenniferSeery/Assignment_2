@@ -1,8 +1,7 @@
-
 class Player
 {
   PVector pos;
-  char up;
+char up;
   char down;
   char left;
   char right;
@@ -11,6 +10,7 @@ class Player
   char button2;
   int index;
   color colour;
+  PImage playerimage;
     
   Player()
   {
@@ -82,8 +82,14 @@ class Player
   {    
     strokeWeight(4);
     stroke(255);
-    fill(0);    
-    ellipse(pos.x, pos.y, 20, 20);
+    fill(0);  
+    image(playerimage,pos.x,pos.y);  
+    
+    
+    
+    
   }  
+ 
+  
 }
 
