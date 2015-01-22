@@ -287,26 +287,44 @@ void setUpPlayerControllers()
   int gap = width / (children.length + 1);
   int y=300;
   
+  
   for(int i = 0 ; i < children.length ; i ++)  
   {
+    color c;
+    if(i==0)
+    { 
+      c=color(255,0,0);
+    }
+    else
+    {
+      c=color(0,0,255);
+    }
+      
     XML playerXML = children[i];
     Player p = new Player(
             i
-            , color(random(0, 255), random(0, 255), random(0, 255))
+             , c
             , playerXML);
     int x = (i + 1) * gap;
+ 
+
+    
+    
     if(i == 0)
     {
-      p.playerimage = loadImage("Sqaure.png");
+   
+      
+      players.add(p);
+      
     }
     if(i == 1)
     {
-      p.playerimage=loadImage("Circle.png");
-    }
+            players.add(p);
+     }
     
     p.pos.x = x;
     p.pos.y = y;
-   players.add(p); 
+    
 }
 
 }

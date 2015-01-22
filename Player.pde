@@ -82,8 +82,10 @@ char up;
   {    
     strokeWeight(4);
     stroke(255);
-    fill(0);  
-    image(playerimage,pos.x,pos.y);  
+    fill(colour);  
+    //image(playerimage,pos.x,pos.y);  
+    rect(pos.x,pos.y,50,50);
+    
     
     
     
