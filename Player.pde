@@ -76,6 +76,24 @@ char up;
     {
       println("Player " + index + " butt2");
     }    
+    
+  // if(i==0)
+  // {
+     /*for(int i=0;i<RedSqArr2.length;i++)
+       {
+         if(RedSqx1>pos.x && RedSqx1 < pos.x+50)
+           {
+               if(RedSqy1 > pos.y && RedSqy1 < pos.y+50)
+               {
+                  RPoints++;
+                  text(RPoints,100,100);
+                  background(255);
+               }
+           }
+       }
+       */
+   }
+    
   }
   
   void display()
@@ -93,5 +111,5 @@ char up;
   }  
  
   
-}
+
 

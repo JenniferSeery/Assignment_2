@@ -1,39 +1,35 @@
 class RedSq
-{
-  float  x= random(width);
-  float  y= random(height,2*height);
-  
+{  
   int speed=20;
+  int size=20;
  
 void falldown() 
 {  
-      y-= 5;
+      RedSqy-= 5;
       stroke(255,0,0);
-      rect(x, y, 20, 20);
+      rect(RedSqx, RedSqy, size, size);
       fill(0);
 
-     if(y<0)
+     if(RedSqy<0)
      {
-       y = height-20;
-       x = random(width);
+       RedSqy = height-20;
+       RedSqx = random(width);
      }
  
 
   }// END OF FALL 
   
-  float x1 = random(width,2*width+60);
-    float y1= random(height);
   void fallacross()
   {     
-      x1 -= 5;
+      RedSqx1 -= 5;
       stroke(255,0,0);
-      rect(x1, y1, 20, 20);
+      rect(RedSqx1, RedSqy1, 20, 20);
       fill(0);
 
-     if(x1<0)
+     if(RedSqx1<0)
      {
-       x1 = width+30;
-       y1 = random(height);
+       RedSqx1 = width+30;
+       RedSqy1 = random(height);
      }
   }
   

@@ -18,8 +18,22 @@ PVector Svelocity;
 //IMAGES
 PImage PlayerSq;
 
-int Slives=500;
-int Clives=500;
+int Blives=500;
+int Rlives=500;
+
+//RED SQUARE VARIABLES
+float  RedSqx= random(width);
+float  RedSqy= random(height,2*height);
+
+//Red Square Variables
+float RedSqx1 = random(width,2*width+60);
+float RedSqy1= random(height);
+
+//Points
+int RPoints;
+int BPoints;
+
+int i;
 
 
 //Number of Red Squares and filling the red square array
