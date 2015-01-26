@@ -1,7 +1,7 @@
 class Player
 {
   PVector pos;
-char up;
+  char up;
   char down;
   char left;
   char right;
@@ -45,24 +45,51 @@ char up;
         );
   } 
   
+  boolean collisionCheck(RedSq r)
+  {
+    if(pos.x - 50 < r.RedSqx + 20 && pos.x + 50 > r.RedSqx && pos.y - 50 < r.RedSqy + 20 && pos.y + 50 > r.RedSqy)
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  boolean collisionCheck(RedCir rc1)
+  {
+    if(pos.x - 50 < rc1.RedCirx + 20 && pos.x + 50 > rc1.RedCirx && pos.y - 50 < rc1.RedCiry + 20 && pos.y + 50 > rc1.RedCiry)
+    {
+      return true;
+    }
+    return false;
+  }
+  
+  boolean collisionCheck2(BlueSq b)
+  {
+    if(pos.x - 50 < b.x + 20 && pos.x + 50 > b.x && pos.y - 50 < b.y + 20 && pos.y + 50 > b.y)
+    {
+      return true;
+    }
+    return false;
+  }
+  
   
   void update()
   {
     if (checkKey(up))
     {
-      pos.y -= 2;
+      pos.y -= 6;
     }
     if (checkKey(down))
     {
-      pos.y += 2;
+      pos.y += 6;
     }
     if (checkKey(left))
     {
-      pos.x -= 2;
+      pos.x -= 6;
     }    
     if (checkKey(right))
     {
-      pos.x += 2;
+      pos.x += 6;
     }
     if (checkKey(start))
     {
@@ -76,24 +103,74 @@ char up;
     {
       println("Player " + index + " butt2");
     }    
-    
-  // if(i==0)
-  // {
-     /*for(int i=0;i<RedSqArr2.length;i++)
-       {
-         if(RedSqx1>pos.x && RedSqx1 < pos.x+50)
-           {
-               if(RedSqy1 > pos.y && RedSqy1 < pos.y+50)
-               {
+
+
+      //RED SQUARE COLLISION HORIZONTAL
+      //if(children[j].i==0)
+       for(int j=0;j<RedSqArr2.length;j++)
+         {
+           if(RedSqx1>pos.x && RedSqx1 < pos.x+50)
+             {
+                 if(RedSqy1 > pos.y && RedSqy1 < pos.y+50)
+                 {
                   RPoints++;
                   text(RPoints,100,100);
                   background(255);
-               }
-           }
-       }
-       */
-   }
+                 }
+             }
+         }
+         
+      if(i==1)
+      {
+         for(int j=0;j<RedSqArr2.length;j++)
+           {
+             if(RedSqx1>pos.x && RedSqx1 < pos.x+50)
+               {
+                   if(RedSqy1 > pos.y && RedSqy1 < pos.y+50)
+                     {
+                        BPoints++;
+                      text(RPoints,100,100);
+                      rect(70,70,70,70);
+                 }
+             }
+         }                        
+    }  
+ // VERTICAL COLLISION DETECTION RED SQUARE
+ /*
+ if(i==0)
+      {
+       for(int j=0;j<RedSqArr.length;j++)
+         {
+           if(pos.y+50>RedSqx && pos.y<RedSqy)
+             {
+                 if(pos.x+50 >RedSqx && pos.x <RedSqy)
+                 {
+                  RPoints++;
+                  //text(RPoints,1000,1000);
+                  background(255,0,0);
+                 }
+             }
+         }
+    }
+      if(i==1)
+      {
+         for(int j=0;j<RedSqArr.length;j++)
+           {
+             if(RedSqx>pos.x+50 && RedSqx < pos.x+50)
+               {
+                   if(RedSqy > pos.y+50 && RedSqy < pos.y+50)
+                     {
+                        BPoints++;
+                      text(RPoints,100,100);
+                      background(255,0,0);
+                 }
+             }
+         }                        
+    }  */
+ 
+
     
+
   }
   
   void display()
@@ -103,12 +180,8 @@ char up;
     fill(colour);  
     //image(playerimage,pos.x,pos.y);  
     rect(pos.x,pos.y,50,50);
-    
-    
-    
-    
-    
-  }  
+    }
+}  
  
   
 

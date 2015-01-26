@@ -3,6 +3,12 @@ BlueSq bs1,bs2;
 RedCir rc1,rc2;
 BlueCir bc1,bc2;
 
+//NEED 8 COLLISION CHECKS 2 DONE VERT RED AND BLUE
+// PLAYER 
+
+
+
+
 //Array List for the players
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
@@ -22,12 +28,19 @@ int Blives=500;
 int Rlives=500;
 
 //RED SQUARE VARIABLES
-float  RedSqx= random(width);
-float  RedSqy= random(height,2*height);
+
 
 //Red Square Variables
 float RedSqx1 = random(width,2*width+60);
 float RedSqy1= random(height);
+
+
+//red circles variables
+float RedCirx1 = random(width,2*width+60);
+float RedCiry1= random(height);
+
+float  RedCirx= random(width);
+float  RedCiry= random(height,2*height);
 
 //Points
 int RPoints;
@@ -35,6 +48,9 @@ int BPoints;
 
 int i;
 
+//These are for testing
+int k = 0;
+int bc = 0;
 
 //Number of Red Squares and filling the red square array
 int redSQ = 2;
@@ -57,7 +73,7 @@ BlueCir[] BlueCirArr= new BlueCir[blueCIR];
 BlueCir[] BlueCirArr2= new BlueCir[blueCIR];
 
 //SIZING OF SCREEN
-boolean devMode = false;
+boolean devMode = true;
 boolean sketchFullScreen() 
 {
   return ! devMode;
@@ -97,56 +113,56 @@ void setup()
   Svelocity = new PVector(1.5,1.5);
   
   //Array for the RedSq Falling from the top
-  for (int i = 0; i < RedSqArr.length; i++) 
+  for (int j = 0; j < RedSqArr.length; j++) 
   {
-    RedSqArr[i] = new RedSq(); // Create each object
+    RedSqArr[j] = new RedSq(); // Create each object
     rs1 = new RedSq();
   }
   
   //Array for the RedSq Falling from the sides
-  for (int i = 0; i < RedSqArr2.length; i++) 
+  for (int j = 0; j < RedSqArr2.length; j++) 
   {
-    RedSqArr2[i] = new RedSq(); // Create each object
+    RedSqArr2[j] = new RedSq(); // Create each object
     rs2 = new RedSq();
   }
   
   //Array for the BlueSq Falling from the top
-  for (int i = 0; i < BlueSqArr.length; i++) 
+  for (int j = 0; j < BlueSqArr.length; j++) 
   {
-    BlueSqArr[i] = new BlueSq(); // Create each object
+    BlueSqArr[j] = new BlueSq(); // Create each object
     bs1 = new BlueSq();
   }
   
   //Array for the BlueSq Falling from the sides
-  for (int i = 0; i < BlueSqArr2.length; i++) 
+  for (int j = 0; j < BlueSqArr2.length; j++) 
   {
-    BlueSqArr2[i] = new BlueSq(); // Create each object
+    BlueSqArr2[j] = new BlueSq(); // Create each object
     bs2 = new BlueSq();
   }
   
   //RED CIRCLE
-  for (int i = 0; i < RedCirArr.length; i++) 
+  for (int j = 0; j < RedCirArr.length; j++) 
   {
-    RedCirArr[i] = new RedCir(); // Create each object
+    RedCirArr[j] = new RedCir(); // Create each object
     rc1 = new RedCir();
   }
   //RED CIRCLE
-  for (int i = 0; i < RedCirArr2.length; i++) 
+  for (int j = 0; j < RedCirArr2.length; j++) 
   {
-    RedCirArr2[i] = new RedCir(); // Create each object
+    RedCirArr2[j] = new RedCir(); // Create each object
     rc2 = new RedCir();
   }
   
   //RED CIRCLE
-  for (int i = 0; i < BlueCirArr.length; i++) 
+  for (int j = 0; j < BlueCirArr.length; j++) 
   {
-    BlueCirArr[i] = new BlueCir(); // Create each object
+    BlueCirArr[j] = new BlueCir(); // Create each object
     bc1 = new BlueCir();
   }
   //RED CIRCLE
-  for (int i = 0; i < BlueCirArr2.length; i++) 
+  for (int j = 0; j < BlueCirArr2.length; j++) 
   {
-    BlueCirArr2[i] = new BlueCir(); // Create each object
+    BlueCirArr2[j] = new BlueCir(); // Create each object
     bc2 = new BlueCir();
   }
   
@@ -166,6 +182,53 @@ void draw()
       player.update();
       player.display();
     }
+    
+    //GOING UP RED SQUARES
+    Player p = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      RedSq r = RedSqArr[i];
+      
+      if(p.collisionCheck(r))
+      {
+        background(255, 0, 0);
+        println(k);
+        k++;
+      }
+    }
+    
+    //GOING UP RED CIRCLES
+    Player p3 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      RedCir rc1 = RedCirArr[i];
+      
+      if(p3.collisionCheck(rc1))
+      {
+        background(255, 0, 0);
+        println(k);
+        k++;
+      }
+    }
+    
+    
+    //GOING UP BLUE SQUARES 
+    Player p2 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      BlueSq b = BlueSqArr[i];
+      
+      if(p2.collisionCheck2(b))
+      {
+        background(0, 0, 255);
+        println("Blue collision" + bc);
+        bc++;
+      }
+    }
+    
   noStroke();
   fill(255,10);
   
@@ -212,48 +275,46 @@ void draw()
   fill(175);
   rect(Slocation.x,Slocation.y,50,50);
   
-  for (int i = 0; i < RedSqArr.length; i++) 
+  for (int j = 0; j < RedSqArr.length; j++) 
   {
-    RedSqArr[i].falldown();
+    RedSqArr[j].falldown();
   }
   
-  for (int i = 0; i < RedSqArr2.length; i++) 
+  for (int j = 0; j < RedSqArr2.length; j++) 
   {
-    RedSqArr2[i].fallacross();
+    RedSqArr2[j].fallacross();
   }
   
-  for (int i = 0; i < BlueSqArr.length; i++) 
+  for (int j = 0; j < BlueSqArr.length; j++) 
   {
-    BlueSqArr[i].falldown();
+    BlueSqArr[j].falldown();
   }
   
-  for (int i = 0; i < BlueSqArr2.length; i++) 
+  for (int j = 0; j < BlueSqArr2.length; j++) 
   {
-    BlueSqArr2[i].fallacross();
+    BlueSqArr2[j].fallacross();
   }
   
-  for (int i = 0; i < RedCirArr.length; i++) 
+  for (int j = 0; j < RedCirArr.length; j++) 
   {
-    RedCirArr[i].falldown();
+    RedCirArr[j].falldown();
   }
   
-  for (int i = 0; i < RedCirArr2.length; i++) 
+  for (int j = 0; j < RedCirArr2.length; j++) 
   {
-    RedCirArr2[i].fallacross();
+    RedCirArr2[j].fallacross();
   }
   
-  for (int i = 0; i < BlueCirArr.length; i++) 
+  for (int j = 0; j < BlueCirArr.length; j++) 
   {
-    BlueCirArr[i].falldown();
+    BlueCirArr[j].falldown();
   }
   
-  for (int i = 0; i < BlueCirArr2.length; i++) 
+  for (int j = 0; j < BlueCirArr2.length; j++) 
   {
-    BlueCirArr2[i].fallacross();
+    BlueCirArr2[j].fallacross();
   }
   
-   
-
 }
 
 void keyPressed()
@@ -326,15 +387,12 @@ void setUpPlayerControllers()
     
     if(i == 0)
     {
-   
-      
       players.add(p);
-      
     }
     if(i == 1)
     {
-            players.add(p);
-     }
+      players.add(p);
+    }
     
     p.pos.x = x;
     p.pos.y = y;

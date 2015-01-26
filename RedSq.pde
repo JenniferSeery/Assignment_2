@@ -1,8 +1,11 @@
 class RedSq
 {  
-  int speed=20;
+  int RSspeed=20;
   int size=20;
- 
+  
+  float  RedSqx= random(width);
+  float  RedSqy= random(height,2*height);
+  
 void falldown() 
 {  
       RedSqy-= 5;
@@ -12,7 +15,7 @@ void falldown()
 
      if(RedSqy<0)
      {
-       RedSqy = height-20;
+       RedSqy = height-RSspeed;
        RedSqx = random(width);
      }
  
@@ -32,7 +35,6 @@ void falldown()
        RedSqy1 = random(height);
      }
   }
-  
   
 }
 

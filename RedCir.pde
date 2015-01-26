@@ -1,39 +1,37 @@
 class RedCir
 {
-  float  x= random(width);
-  float  y= random(height,2*height);
+  
   
   int speed=20;
  
 void falldown() 
 {  
-      y-= 5;
+      RedCiry-= 5;
       stroke(255,0,0);
-      ellipse(x, y, 20, 20);
+      ellipse(RedCirx, RedCiry, 20, 20);
       fill(0);
 
-     if(y<0)
+     if(RedCiry<0)
      {
-       y = height-20;
-       x = random(width);
+       RedCiry = height-20;
+       RedCirx = random(width);
      }
  
 
   }// END OF FALL 
   
-  float x1 = random(width,2*width+60);
-    float y1= random(height);
+  
   void fallacross()
   {     
-      x1 -= 5;
+      RedCirx1 -= 5;
       stroke(255,0,0);
-      ellipse(x1, y1, 20, 20);
+      ellipse(RedCirx1, RedCiry1, 20, 20);
       fill(0);
 
-     if(x1<0)
+     if(RedCirx1<0)
      {
-       x1 = width+30;
-       y1 = random(height);
+       RedCirx1 = width+30;
+       RedCiry1 = random(height);
      }
   }
   
