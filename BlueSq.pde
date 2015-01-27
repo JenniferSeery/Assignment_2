@@ -14,7 +14,7 @@ void falldown()
 
      if(y<0)
      {
-       y = height-20;
+       y = height-bSpeeds;
        x = random(width);
      }
  
@@ -31,7 +31,7 @@ void falldown()
 
      if(BlueSqx1<0)
      {
-       BlueSqx1 = width+30;
+       BlueSqx1 = width+bSpeeds;
        BlueSqy1 = random(height);
      }
   }

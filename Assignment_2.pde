@@ -11,6 +11,13 @@ boolean[] keys = new boolean[526];
 PVector Clocation;
 PVector Cvelocity;
 
+//RED PLAYER SCORES 
+int RPcircles;
+int RPsquares;
+
+int BPsquares;
+int BPcircles;
+
 //Vectors for the Square
 PVector Slocation;
 PVector Svelocity;
@@ -37,6 +44,9 @@ int BPoints;
 
 int i;
 
+//Player Size 
+int playerSize =50;
+
 //These are for testing
 int k = 0;
 int bc = 0;
@@ -60,6 +70,10 @@ RedCir[] RedCirArr2= new RedCir[redCIR];
 int blueCIR = 2;
 BlueCir[] BlueCirArr= new BlueCir[blueCIR];
 BlueCir[] BlueCirArr2= new BlueCir[blueCIR];
+
+//Collectable Speed
+int bSpeeds =10;
+int rSpeeds =10;
 
 //SIZING OF SCREEN
 boolean devMode = true;
@@ -178,20 +192,29 @@ void draw()
     
     //GOING UP RED SQUARES
     Player p = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
-    
+    textSize(24);
+    fill(255,0,0);
+    text("PLAYER RED SQUARES ",20,30);
+    text(RPsquares, 280, 30);
     for(int i = 0; i < players.size(); i++)
     {
       RedSq r = RedSqArr[i];
       
       if(p.collisionCheck(r))
       {
-        background(255, 0, 0);
-        println(k);
-        k++;
+               
+        println(RPsquares);
+        RPsquares++;
       }
     }
     
     //GOING UP BLUE SQUARES 
+    
+    textSize(24);
+    fill(255,0,0);
+    text("PLAYER BLUE SQUARES ",420,30);
+    text(BPsquares, 700, 30);
+    
     Player p2 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
     
     for(int i = 0; i < players.size(); i++)
@@ -200,14 +223,18 @@ void draw()
       
       if(p2.collisionCheck2(b))
       {
-        background(0, 0, 255);
-        println("Blue collision" + bc);
-        bc++;
+        
+        BPsquares++;
       }
     }
     
     //GOING UP RED CIRCLES
     Player p3 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+    
+    textSize(24);
+    fill(255,0,0);
+    text("PLAYER RED CIRCLES: ",20,50);
+    text(RPcircles, 270, 50);
     
     for(int i = 0; i < players.size(); i++)
     {
@@ -215,24 +242,23 @@ void draw()
       
       if(p3.collisionCheck(rc1))
       {
-        background(255, 0, 0);
-        println(k);
-        k++;
+        RPcircles++;
       }
     }
     
     //GOING UP BLUE CIR
     Player p4 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
-    
+    textSize(24);
+    fill(255,0,0);
+    text("PLAYER BLUE CIRCLES: ",420,50);
+    text(BPcircles, 700, 50);
     for(int i = 0; i < players.size(); i++)
     {
       BlueCir b1 = BlueCirArr[i];
       
       if(p4.collisionCheck2(b1))
       {
-        background(0, 0, 255);
-        println("Blue collision" + bc);
-        bc++;
+        BPcircles++;
       }
     }
     
@@ -244,9 +270,8 @@ void draw()
       
       if(p5.collisionCheck3(r1))
       {
-        background(255, 0, 0);
-        println(k);
-        k++;
+        println(RPsquares);
+        RPsquares++;
       }
     }
     
@@ -258,9 +283,7 @@ void draw()
       
       if(p6.collisionCheck3(rc))
       {
-        background(255, 0, 0);
-        println(k);
-        k++;
+        RPcircles++;
       }
     }
     
@@ -297,9 +320,7 @@ void draw()
       
       if(p8.collisionCheck3(bs))
       {
-        background(0, 0, 255);
-        println(bc);
-        bc++;
+        BPsquares++;
       }
     }
     

@@ -3,7 +3,7 @@ class BlueCir
   float  BlueCirx= random(width);
   float  BlueCiry= random(height,2*height);
   
-  int speed=20;
+  int speed=10;
  
 void falldown() 
 {  
@@ -14,7 +14,7 @@ void falldown()
 
      if(BlueCiry<0)
      {
-       BlueCiry = height-20;
+       BlueCiry = height-bSpeeds;
        BlueCirx = random(width);
      }
  
@@ -31,7 +31,7 @@ void falldown()
 
      if(BlueCirx1<0)
      {
-       BlueCirx1 = width+speed;
+       BlueCirx1 = width+bSpeeds;
        BlueCiry1 = random(height);
      }
   }

@@ -47,7 +47,7 @@ class Player
   
   boolean collisionCheck(RedSq r)
   {
-    if(pos.x - 50 < r.RedSqx + 20 && pos.x + 50 > r.RedSqx && pos.y - 50 < r.RedSqy + 20 && pos.y + 50 > r.RedSqy)
+    if(pos.x - playerSize < r.RedSqx + 20 && pos.x + playerSize > r.RedSqx && pos.y - 50 < r.RedSqy + 20 && pos.y + playerSize > r.RedSqy)
     {
       return true;
     }
@@ -56,7 +56,7 @@ class Player
   
   boolean collisionCheck3(RedSq r1)
   {
-    if(RedSqx1>pos.x && RedSqx1 < pos.x+50 &&RedSqy1 > pos.y && RedSqy1 < pos.y+50)
+    if(RedSqx1>pos.x && RedSqx1 < pos.x+playerSize &&RedSqy1 > pos.y && RedSqy1 < pos.y+playerSize)
     {
       return true;
     }
@@ -65,7 +65,7 @@ class Player
   
   boolean collisionCheck(RedCir rc1)
   {
-    if(pos.x - 50 < rc1.RedCirx + 20 && pos.x + 50 > rc1.RedCirx && pos.y - 50 < rc1.RedCiry + 20 && pos.y + 50 > rc1.RedCiry)
+    if(pos.x - playerSize< rc1.RedCirx + 20 && pos.x + playerSize > rc1.RedCirx && pos.y - playerSize < rc1.RedCiry + 20 && pos.y + playerSize > rc1.RedCiry)
     {
       return true;
     }
@@ -74,7 +74,7 @@ class Player
   
   boolean collisionCheck3(RedCir rc)
   {
-    if(RedCirx1>pos.x && RedCirx1 < pos.x+50 && RedCiry1 > pos.y && RedCiry1 < pos.y+50)
+    if(RedCirx1>pos.x && RedCirx1 < pos.x+playerSize && RedCiry1 > pos.y && RedCiry1 < pos.y+playerSize)
     {
       return true;
     }
@@ -83,7 +83,7 @@ class Player
   
   boolean collisionCheck2(BlueSq b)
   {
-    if(pos.x - 50 < b.x + 20 && pos.x + 50 > b.x && pos.y - 50 < b.y + 20 && pos.y + 50 > b.y)
+    if(pos.x - playerSize < b.x + 20 && pos.x + playerSize > b.x && pos.y - playerSize < b.y + 20 && pos.y + playerSize > b.y)
     {
       return true;
     }
@@ -92,7 +92,7 @@ class Player
   
   boolean collisionCheck2(BlueCir b1)
   {
-    if(pos.x - 50 < b1.BlueCirx + 20 && pos.x + 50 > b1.BlueCirx && pos.y - 50 < b1.BlueCiry + 20 && pos.y + 50 > b1.BlueCiry)
+    if(pos.x - playerSize < b1.BlueCirx + 20 && pos.x + playerSize > b1.BlueCirx && pos.y - playerSize < b1.BlueCiry + 20 && pos.y + playerSize > b1.BlueCiry)
     {
       return true;
     }
@@ -101,7 +101,7 @@ class Player
   
   boolean collisionCheck3(BlueCir bc)
   {
-    if(BlueCirx1>pos.x && BlueCirx1 < pos.x+50 && BlueCiry1 > pos.y && BlueCiry1 < pos.y+50)
+    if(BlueCirx1>pos.x && BlueCirx1 < pos.x+playerSize && BlueCiry1 > pos.y && BlueCiry1 < pos.y+playerSize)
     {
       return true;
     }
@@ -110,7 +110,7 @@ class Player
   
   boolean collisionCheck3(BlueSq bs)
   {
-    if(BlueSqx1>pos.x && BlueSqx1 < pos.x+50 && BlueSqy1 > pos.y && BlueSqy1 < pos.y+50)
+    if(BlueSqx1>pos.x && BlueSqx1 < pos.x+playerSize && BlueSqy1 > pos.y && BlueSqy1 < pos.y+playerSize)
     {
       return true;
     }
@@ -150,20 +150,23 @@ class Player
     }    
 
 
-     
- 
+  if(RPsquares > 100 && BPsquares>100)
+ {
+   playerSize = 30;
+ }
 
     
-
+ 
   }
+
+  
   
   void display()
   {    
     strokeWeight(4);
     stroke(255);
     fill(colour);  
-    //image(playerimage,pos.x,pos.y);  
-    rect(pos.x,pos.y,50,50);
+    rect(pos.x,pos.y,playerSize,playerSize);
     }
 }  
  

@@ -14,7 +14,7 @@ void falldown()
 
      if(RedCiry<0)
      {
-       RedCiry = height-20;
+       RedCiry = height-rSpeeds;
        RedCirx = random(width);
      }
  
@@ -32,7 +32,7 @@ void falldown()
 
      if(RedCirx1<0)
      {
-       RedCirx1 = width+30;
+       RedCirx1 = width+rSpeeds;
        RedCiry1 = random(height);
      }
   }
