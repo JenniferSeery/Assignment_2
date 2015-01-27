@@ -150,10 +150,23 @@ class Player
     }    
 
 
-  if(RPsquares > 100 && BPsquares>100)
- {
-   playerSize = 30;
- }
+  //EDITING THE PLAYERS SIZE WHEN IT GET TO A CERTAIN SCORE 
+  if(RPsquares > 500 && RPcircles>500)
+   {
+     image(RWin,0,60);
+   }
+   
+   if(BPsquares >500 && BPcircles>500)
+   {
+     image(BWin,0,60);
+   }
+   
+   if(help==1)
+   {
+     image(instruct,0,60);
+   }
+   
+   
 
     
  

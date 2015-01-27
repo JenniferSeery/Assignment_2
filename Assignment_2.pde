@@ -11,72 +11,76 @@ boolean[] keys = new boolean[526];
 PVector Clocation;
 PVector Cvelocity;
 
-//RED PLAYER SCORES 
-int RPcircles;
-int RPsquares;
-
-int BPsquares;
-int BPcircles;
-
 //Vectors for the Square
 PVector Slocation;
 PVector Svelocity;
 
-int Blives=500;
-int Rlives=500;
+//RED PLAYER SCORES 
+int RPcircles;
+int RPsquares;
 
-//Red Square Variables
+//BLUE PLAYER SCORES 
+int BPsquares;
+int BPcircles;
+
+
+int help;
+
+
+//SPLASH VARIABLES
+PImage Splash;
+PImage RWin;
+PImage BWin;
+PImage instruct;
+int SpSwitch=0;
+
+
+
+//RED SQUARE VARIABLES ACROSS
 float RedSqx1 = random(width,2*width+60);
 float RedSqy1= random(height);
-
+//RED CIRCLE VARIABLES
 float RedCirx1 = random(width,2*width+60);
 float RedCiry1= random(height);
-
+//BLUE CIRCLE VARIABLES
 float BlueCirx1 = random(width,2*width+60);
- float BlueCiry1= random(height);
- 
- float BlueSqx1 = random(width,2*width+60);
-    float BlueSqy1= random(height);
+float BlueCiry1= random(height);
+// BLUE SQUARE VARIABLES
+float BlueSqx1 = random(width,2*width+60);
+float BlueSqy1= random(height);
 
-//Points
-int RPoints;
-int BPoints;
 
 int i;
 
-//Player Size 
+//PLAYER SIZE 
 int playerSize =50;
 
-//These are for testing
-int k = 0;
-int bc = 0;
-
-//Number of Red Squares and filling the red square array
+//NUMBER OF RED SQUARES AND FILLING THE ARRAYS
 int redSQ = 2;
 RedSq[] RedSqArr= new RedSq[redSQ];
 RedSq[] RedSqArr2= new RedSq[redSQ];
 
-//Number of Red Squares and filling the red square array
+////NUMBER OF BLUE SQUARES AND FILLING THE ARRAYS
 int blueSQ = 2;
 BlueSq[] BlueSqArr= new BlueSq[blueSQ];
 BlueSq[] BlueSqArr2= new BlueSq[blueSQ];
 
-//Number of Red Squares and filling the red square array
+////NUMBER OF RED CIRCLES AND FILLING THE ARRAYS
 int redCIR = 2;
 RedCir[] RedCirArr= new RedCir[redCIR];
 RedCir[] RedCirArr2= new RedCir[redCIR];
 
-//Number of Red Squares and filling the red square array
+////NUMBER OF BLUE CIRCLE AND FILLING THE ARRAYS
 int blueCIR = 2;
 BlueCir[] BlueCirArr= new BlueCir[blueCIR];
 BlueCir[] BlueCirArr2= new BlueCir[blueCIR];
 
-//Collectable Speed
+//COLLECTABLE SPEEDS
 int bSpeeds =10;
 int rSpeeds =10;
 
 //SIZING OF SCREEN
-boolean devMode = true;
+boolean devMode = false;
 boolean sketchFullScreen() 
 {
   return ! devMode;
@@ -96,8 +100,7 @@ AudioInput input;
 
 void setup()
 {
- 
-  
+  //SIZING OF SCREEN
   if (devMode)
   {
     size(800, 600);
@@ -106,96 +109,115 @@ void setup()
   {
     size(displayWidth, displayHeight);
   }
-  
- // size(1000, 600);
   smooth();
   setUpPlayerControllers();
-  
-  //PlayerSq = loadImage("Square.png");
-  
-  //Initalizing the PVectors 
+ 
+  //INITALIZING P VECTORS FOR BACKGROUND MOVEMENT
   Clocation = new PVector(100,100);
   Cvelocity = new PVector(1.5,1.5);
   Slocation = new PVector(0,150);
   Svelocity = new PVector(1.5,1.5);
   
-  //Array for the RedSq Falling from the top
+  //RED SQUARES FALLING FROM THE BOTTOM
   for (int j = 0; j < RedSqArr.length; j++) 
   {
     RedSqArr[j] = new RedSq(); // Create each object
     rs1 = new RedSq();
   }
   
-  //Array for the RedSq Falling from the sides
+  //RED SQAURES SLIDING ACROSS
   for (int j = 0; j < RedSqArr2.length; j++) 
   {
     RedSqArr2[j] = new RedSq(); // Create each object
     rs2 = new RedSq();
   }
   
-  //Array for the BlueSq Falling from the top
+  //BLUE SQUARES FALLING FROM BOTTOM
   for (int j = 0; j < BlueSqArr.length; j++) 
   {
     BlueSqArr[j] = new BlueSq(); // Create each object
     bs1 = new BlueSq();
   }
   
-  //Array for the BlueSq Falling from the sides
+  //BLUE SQUARES SLIDING ACROSS
   for (int j = 0; j < BlueSqArr2.length; j++) 
   {
     BlueSqArr2[j] = new BlueSq(); // Create each object
     bs2 = new BlueSq();
   }
   
-  //RED CIRCLE
+  //RED CIRCLE FROM BOTTOM
   for (int j = 0; j < RedCirArr.length; j++) 
   {
     RedCirArr[j] = new RedCir(); // Create each object
     rc1 = new RedCir();
   }
-  //RED CIRCLE
+  //RED CIRCLE FROM SIDES
   for (int j = 0; j < RedCirArr2.length; j++) 
   {
     RedCirArr2[j] = new RedCir(); // Create each object
     rc2 = new RedCir();
   }
   
-  //RED CIRCLE
+  //BLUE CIRCLE FROM BOTTOM
   for (int j = 0; j < BlueCirArr.length; j++) 
   {
     BlueCirArr[j] = new BlueCir(); // Create each object
     bc1 = new BlueCir();
   }
-  //RED CIRCLE
+  //BLUE CIRCLE FROM SIDES
   for (int j = 0; j < BlueCirArr2.length; j++) 
   {
     BlueCirArr2[j] = new BlueCir(); // Create each object
     bc2 = new BlueCir();
   }
   
-   minim = new Minim(this);
-   songSetup();
-   int i = (int) random(0,songs.size());
-      player= songs.get(i).songs;
-      player.play();
-
+  //MUSIC
+    minim = new Minim(this);
+    songSetup();
+    int i = (int) random(0,songs.size());
+    player= songs.get(i).songs;
+    player.play();
+    
+    //LOADING
+    Splash=loadImage("RaveToGraveOpening.png");
+    RWin=loadImage("RedPlayer.png");
+    BWin=loadImage("BluePlayer.png");
+    instruct=loadImage("INSTRUCTIONS.png");
+    
 }
 
 void draw()
 {
-   background(0);
+  
+  if(SpSwitch==0)
+  {
+    background(0);
+    image(Splash,-150,180);
+    
+  }
+  else
+  {
+    background(0);
+  }
+
    for(Player player:players)
     {
       player.update();
       player.display();
     }
     
+    
+    //COLLISION
+    
     //GOING UP RED SQUARES
     Player p = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+    //SCORING 
     textSize(24);
     fill(255,0,0);
     text("PLAYER RED SQUARES ",20,30);
     text(RPsquares, 280, 30);
+    //COLLISION
     for(int i = 0; i < players.size(); i++)
     {
       RedSq r = RedSqArr[i];
@@ -209,9 +231,9 @@ void draw()
     }
     
     //GOING UP BLUE SQUARES 
-    
+    //SCORING
     textSize(24);
-    fill(255,0,0);
+    fill(0,0,255);
     text("PLAYER BLUE SQUARES ",420,30);
     text(BPsquares, 700, 30);
     
@@ -242,14 +264,14 @@ void draw()
       
       if(p3.collisionCheck(rc1))
       {
-        RPcircles++;
+        RPcircles=RPcircles+2;
       }
     }
     
     //GOING UP BLUE CIR
     Player p4 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
     textSize(24);
-    fill(255,0,0);
+    fill(0,0,255);
     text("PLAYER BLUE CIRCLES: ",420,50);
     text(BPcircles, 700, 50);
     for(int i = 0; i < players.size(); i++)
@@ -258,7 +280,7 @@ void draw()
       
       if(p4.collisionCheck2(b1))
       {
-        BPcircles++;
+        BPcircles=BPcircles+2;
       }
     }
     
@@ -283,7 +305,7 @@ void draw()
       
       if(p6.collisionCheck3(rc))
       {
-        RPcircles++;
+        RPcircles=RPcircles+2;
       }
     }
     
@@ -295,24 +317,11 @@ void draw()
       
       if(p7.collisionCheck3(bc))
       {
-        background(0, 0, 255);
-        println(bc);
-        //bc++;
+        BPcircles=BPcircles+2;
       }
     }
     
-    
-    
-    if(!player.isPlaying() )
-    {
-      int i = (int) random(0,songs.size());
-      player= songs.get(i).songs;
-      player.play();
-    }
-      
-  
-    
-    Player p8 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
+  Player p8 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
     
     for(int i = 0; i < players.size(); i++)
     {
@@ -324,16 +333,17 @@ void draw()
       }
     }
     
-    
-    
-    
-    
-    
+    if(!player.isPlaying() )
+    {
+      int i = (int) random(0,songs.size());
+      player= songs.get(i).songs;
+      player.play();
+    }
     
   noStroke();
   fill(255,10);
   
-  //-------CIRCLE -------
+  //-------CIRCLE ------- BOUNCING BACKGROUND
   // Add the circles current speed to the circles location.
   Clocation.add(Cvelocity);
   
@@ -421,12 +431,33 @@ void draw()
 void keyPressed()
 {
   keys[keyCode] = true;
+  
+  if (key == 'P'||key=='p'&& key=='Q' || key=='q')
+  {
+    //SPLASH CONTROL
+     SpSwitch++;
+     RPcircles=0;
+      RPsquares=0;
+    //BLUE PLAYER SCORES 
+      BPsquares=0;
+      BPcircles=0;
+      help=0;
+  }
+  
+  if (key == 'I'||key=='i')
+  {
+    help++;
+  }
+  
+  
 }
 
 void keyReleased()
 {
   keys[keyCode] = false;
 }
+
+
 
 boolean checkKey(char theKey)
 {
@@ -501,4 +532,8 @@ void setUpPlayerControllers()
 }
 
 }
+ 
+  
+  
+  
 
