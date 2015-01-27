@@ -1,39 +1,38 @@
 class BlueCir
 {
-  float  x= random(width);
-  float  y= random(height,2*height);
+  float  BlueCirx= random(width);
+  float  BlueCiry= random(height,2*height);
   
   int speed=20;
  
 void falldown() 
 {  
-      y-= 5;
+      BlueCiry-= 5;
       stroke(0,0,255);
-      ellipse(x, y, 20, 20);
+      ellipse(BlueCirx, BlueCiry, 20, 20);
       fill(0);
 
-     if(y<0)
+     if(BlueCiry<0)
      {
-       y = height-20;
-       x = random(width);
+       BlueCiry = height-20;
+       BlueCirx = random(width);
      }
  
 
   }// END OF FALL 
   
-  float x1 = random(width,2*width+60);
-    float y1= random(height);
+  
   void fallacross()
   {     
-      x1 -= 5;
+      BlueCirx1 -= 5;
       stroke(0,0,255);
-      ellipse(x1, y1, 20, 20);
+      ellipse(BlueCirx1, BlueCiry1, 20, 20);
       fill(0);
 
-     if(x1<0)
+     if(BlueCirx1<0)
      {
-       x1 = width+speed;
-       y1 = random(height);
+       BlueCirx1 = width+speed;
+       BlueCiry1 = random(height);
      }
   }
   

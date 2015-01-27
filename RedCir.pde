@@ -1,6 +1,7 @@
 class RedCir
 {
-  
+  float  RedCirx= random(width);
+float  RedCiry= random(height,2*height);
   
   int speed=20;
  
@@ -23,6 +24,7 @@ void falldown()
   
   void fallacross()
   {     
+    
       RedCirx1 -= 5;
       stroke(255,0,0);
       ellipse(RedCirx1, RedCiry1, 20, 20);

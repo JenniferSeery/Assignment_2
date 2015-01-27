@@ -21,19 +21,18 @@ void falldown()
 
   }// END OF FALL 
   
-  float x1 = random(width,2*width+60);
-    float y1= random(height);
+  
   void fallacross()
   {     
-      x1 -= 5;
+      BlueSqx1 -= 5;
       stroke(0,0,255);
-      rect(x1, y1, 20, 20);
+      rect(BlueSqx1, BlueSqy1, 20, 20);
       fill(0);
 
-     if(x1<0)
+     if(BlueSqx1<0)
      {
-       x1 = width+30;
-       y1 = random(height);
+       BlueSqx1 = width+30;
+       BlueSqy1 = random(height);
      }
   }
   

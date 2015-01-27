@@ -3,12 +3,6 @@ BlueSq bs1,bs2;
 RedCir rc1,rc2;
 BlueCir bc1,bc2;
 
-//NEED 8 COLLISION CHECKS 2 DONE VERT RED AND BLUE
-// PLAYER 
-
-
-
-
 //Array List for the players
 ArrayList<Player> players = new ArrayList<Player>();
 boolean[] keys = new boolean[526];
@@ -21,26 +15,21 @@ PVector Cvelocity;
 PVector Slocation;
 PVector Svelocity;
 
-//IMAGES
-PImage PlayerSq;
-
 int Blives=500;
 int Rlives=500;
-
-//RED SQUARE VARIABLES
-
 
 //Red Square Variables
 float RedSqx1 = random(width,2*width+60);
 float RedSqy1= random(height);
 
-
-//red circles variables
 float RedCirx1 = random(width,2*width+60);
 float RedCiry1= random(height);
 
-float  RedCirx= random(width);
-float  RedCiry= random(height,2*height);
+float BlueCirx1 = random(width,2*width+60);
+ float BlueCiry1= random(height);
+ 
+ float BlueSqx1 = random(width,2*width+60);
+    float BlueSqy1= random(height);
 
 //Points
 int RPoints;
@@ -88,8 +77,12 @@ Minim minim;
 AudioPlayer player;
 AudioInput input; 
 
+
+
+
 void setup()
 {
+ 
   
   if (devMode)
   {
@@ -166,11 +159,11 @@ void setup()
     bc2 = new BlueCir();
   }
   
-    // MUSIC 
-    minim = new Minim(this);
-    player = minim.loadFile("Sandstorm.mp3");
-    input = minim.getLineIn();
-    player.play();
+   minim = new Minim(this);
+   songSetup();
+   int i = (int) random(0,songs.size());
+      player= songs.get(i).songs;
+      player.play();
 
 }
 
@@ -198,6 +191,21 @@ void draw()
       }
     }
     
+    //GOING UP BLUE SQUARES 
+    Player p2 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      BlueSq b = BlueSqArr[i];
+      
+      if(p2.collisionCheck2(b))
+      {
+        background(0, 0, 255);
+        println("Blue collision" + bc);
+        bc++;
+      }
+    }
+    
     //GOING UP RED CIRCLES
     Player p3 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
     
@@ -213,21 +221,93 @@ void draw()
       }
     }
     
-    
-    //GOING UP BLUE SQUARES 
-    Player p2 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
+    //GOING UP BLUE CIR
+    Player p4 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
     
     for(int i = 0; i < players.size(); i++)
     {
-      BlueSq b = BlueSqArr[i];
+      BlueCir b1 = BlueCirArr[i];
       
-      if(p2.collisionCheck2(b))
+      if(p4.collisionCheck2(b1))
       {
         background(0, 0, 255);
         println("Blue collision" + bc);
         bc++;
       }
     }
+    
+    Player p5 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      RedSq r1 = RedSqArr2[i];
+      
+      if(p5.collisionCheck3(r1))
+      {
+        background(255, 0, 0);
+        println(k);
+        k++;
+      }
+    }
+    
+    Player p6 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+  
+    for(int i = 0; i < players.size(); i++)
+    {
+      RedCir rc = RedCirArr2[i];
+      
+      if(p6.collisionCheck3(rc))
+      {
+        background(255, 0, 0);
+        println(k);
+        k++;
+      }
+    }
+    
+    Player p7 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      BlueCir bc = BlueCirArr2[i];
+      
+      if(p7.collisionCheck3(bc))
+      {
+        background(0, 0, 255);
+        println(bc);
+        //bc++;
+      }
+    }
+    
+    
+    
+    if(!player.isPlaying() )
+    {
+      int i = (int) random(0,songs.size());
+      player= songs.get(i).songs;
+      player.play();
+    }
+      
+  
+    
+    Player p8 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
+    
+    for(int i = 0; i < players.size(); i++)
+    {
+      BlueSq bs = BlueSqArr2[i];
+      
+      if(p8.collisionCheck3(bs))
+      {
+        background(0, 0, 255);
+        println(bc);
+        bc++;
+      }
+    }
+    
+    
+    
+    
+    
+    
     
   noStroke();
   fill(255,10);
