@@ -1,7 +1,7 @@
-RedSq rs1,rs2;
-BlueSq bs1,bs2;
-RedCir rc1,rc2;
-BlueCir bc1,bc2;
+RedSq rs1, rs2;
+BlueSq bs1, bs2;
+RedCir rc1, rc2;
+BlueCir bc1, bc2;
 
 //Array List for the players
 ArrayList<Player> players = new ArrayList<Player>();
@@ -37,16 +37,16 @@ int SpSwitch=0;
 
 
 //RED SQUARE VARIABLES ACROSS
-float RedSqx1 = random(width,2*width+60);
+float RedSqx1 = random(width, 2*width+60);
 float RedSqy1= random(height);
 //RED CIRCLE VARIABLES
-float RedCirx1 = random(width,2*width+60);
+float RedCirx1 = random(width, 2*width+60);
 float RedCiry1= random(height);
 //BLUE CIRCLE VARIABLES
-float BlueCirx1 = random(width,2*width+60);
+float BlueCirx1 = random(width, 2*width+60);
 float BlueCiry1= random(height);
 // BLUE SQUARE VARIABLES
-float BlueSqx1 = random(width,2*width+60);
+float BlueSqx1 = random(width, 2*width+60);
 float BlueSqy1= random(height);
 
 
@@ -104,48 +104,47 @@ void setup()
   if (devMode)
   {
     size(800, 600);
-  }
-  else
+  } else
   {
     size(displayWidth, displayHeight);
   }
   smooth();
   setUpPlayerControllers();
- 
+
   //INITALIZING P VECTORS FOR BACKGROUND MOVEMENT
-  Clocation = new PVector(100,100);
-  Cvelocity = new PVector(1.5,1.5);
-  Slocation = new PVector(0,150);
-  Svelocity = new PVector(1.5,1.5);
-  
+  Clocation = new PVector(100, 100);
+  Cvelocity = new PVector(1.5, 1.5);
+  Slocation = new PVector(0, 150);
+  Svelocity = new PVector(1.5, 1.5);
+
   //RED SQUARES FALLING FROM THE BOTTOM
   for (int j = 0; j < RedSqArr.length; j++) 
   {
     RedSqArr[j] = new RedSq(); // Create each object
     rs1 = new RedSq();
   }
-  
+
   //RED SQAURES SLIDING ACROSS
   for (int j = 0; j < RedSqArr2.length; j++) 
   {
     RedSqArr2[j] = new RedSq(); // Create each object
     rs2 = new RedSq();
   }
-  
+
   //BLUE SQUARES FALLING FROM BOTTOM
   for (int j = 0; j < BlueSqArr.length; j++) 
   {
     BlueSqArr[j] = new BlueSq(); // Create each object
     bs1 = new BlueSq();
   }
-  
+
   //BLUE SQUARES SLIDING ACROSS
   for (int j = 0; j < BlueSqArr2.length; j++) 
   {
     BlueSqArr2[j] = new BlueSq(); // Create each object
     bs2 = new BlueSq();
   }
-  
+
   //RED CIRCLE FROM BOTTOM
   for (int j = 0; j < RedCirArr.length; j++) 
   {
@@ -158,7 +157,7 @@ void setup()
     RedCirArr2[j] = new RedCir(); // Create each object
     rc2 = new RedCir();
   }
-  
+
   //BLUE CIRCLE FROM BOTTOM
   for (int j = 0; j < BlueCirArr.length; j++) 
   {
@@ -171,194 +170,191 @@ void setup()
     BlueCirArr2[j] = new BlueCir(); // Create each object
     bc2 = new BlueCir();
   }
-  
+
   //MUSIC
-    minim = new Minim(this);
-    songSetup();
-    int i = (int) random(0,songs.size());
-    player= songs.get(i).songs;
-    player.play();
-    
-    //LOADING
-    Splash=loadImage("RaveToGraveOpening.png");
-    RWin=loadImage("RedPlayer.png");
-    BWin=loadImage("BluePlayer.png");
-    instruct=loadImage("INSTRUCTIONS.png");
-    
+  minim = new Minim(this);
+  songSetup();
+  int i = (int) random(0, songs.size());
+  player= songs.get(i).songs;
+  player.play();
+
+  //LOADING
+  Splash=loadImage("RaveToGraveOpening.png");
+  RWin=loadImage("RedPlayer.png");
+  BWin=loadImage("BluePlayer.png");
+  instruct=loadImage("INSTRUCTIONS.png");
 }
 
 void draw()
 {
-  
-  if(SpSwitch==0)
+
+  if (SpSwitch==0)
   {
     background(0);
-    image(Splash,-150,180);
-    
-  }
-  else
+    image(Splash, -150, 180);
+  } else
   {
     background(0);
   }
 
-   for(Player player:players)
+  for (Player player : players)
+  {
+    player.update();
+    player.display();
+  }
+
+
+  //COLLISION
+
+  //GOING UP RED SQUARES
+  Player p = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+  //SCORING 
+  textSize(24);
+  fill(255, 0, 0);
+  text("PLAYER RED SQUARES ", 20, 30);
+  text(RPsquares, 280, 30);
+  //COLLISION
+  for (int i = 0; i < players.size (); i++)
+  {
+    RedSq r = RedSqArr[i];
+
+    if (p.collisionCheck(r))
     {
-      player.update();
-      player.display();
+
+
+      RPsquares++;
     }
-    
-    
-    //COLLISION
-    
-    //GOING UP RED SQUARES
-    Player p = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
-    //SCORING 
-    textSize(24);
-    fill(255,0,0);
-    text("PLAYER RED SQUARES ",20,30);
-    text(RPsquares, 280, 30);
-    //COLLISION
-    for(int i = 0; i < players.size(); i++)
+  }
+
+  //GOING UP BLUE SQUARES 
+  //SCORING
+  textSize(24);
+  fill(0, 0, 255);
+  text("PLAYER BLUE SQUARES ", 420, 30);
+  text(BPsquares, 700, 30);
+
+  Player p2 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
+
+  for (int i = 0; i < players.size (); i++)
+  {
+    BlueSq b = BlueSqArr[i];
+
+    if (p2.collisionCheck2(b))
     {
-      RedSq r = RedSqArr[i];
-      
-      if(p.collisionCheck(r))
-      {
-               
-        
-        RPsquares++;
-      }
+
+      BPsquares++;
     }
-    
-    //GOING UP BLUE SQUARES 
-    //SCORING
-    textSize(24);
-    fill(0,0,255);
-    text("PLAYER BLUE SQUARES ",420,30);
-    text(BPsquares, 700, 30);
-    
-    Player p2 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
-    
-    for(int i = 0; i < players.size(); i++)
+  }
+
+  //GOING UP RED CIRCLES
+  Player p3 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+
+  textSize(24);
+  fill(255, 0, 0);
+  text("PLAYER RED CIRCLES: ", 20, 50);
+  text(RPcircles, 270, 50);
+
+  for (int i = 0; i < players.size (); i++)
+  {
+    RedCir rc1 = RedCirArr[i];
+
+    if (p3.collisionCheck(rc1))
     {
-      BlueSq b = BlueSqArr[i];
-      
-      if(p2.collisionCheck2(b))
-      {
-        
-        BPsquares++;
-      }
+      background(255, 0, 0);
+      RPcircles=RPcircles+2;
     }
-    
-    //GOING UP RED CIRCLES
-    Player p3 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
-    
-    textSize(24);
-    fill(255,0,0);
-    text("PLAYER RED CIRCLES: ",20,50);
-    text(RPcircles, 270, 50);
-    
-    for(int i = 0; i < players.size(); i++)
+  }
+
+  //GOING UP BLUE CIR
+  Player p4 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
+  textSize(24);
+  fill(0, 0, 255);
+  text("PLAYER BLUE CIRCLES: ", 420, 50);
+  text(BPcircles, 700, 50);
+  for (int i = 0; i < players.size (); i++)
+  {
+    BlueCir b1 = BlueCirArr[i];
+
+    if (p4.collisionCheck2(b1))
     {
-      RedCir rc1 = RedCirArr[i];
-      
-      if(p3.collisionCheck(rc1))
-      {
-        background(255,0,0);
-        RPcircles=RPcircles+2;
-      }
+      background(0, 0, 255);
+      BPcircles=BPcircles+2;
     }
-    
-    //GOING UP BLUE CIR
-    Player p4 = players.get(1); // DECTECTING COLLISION WITH THE BLUE SQUARE 
-    textSize(24);
-    fill(0,0,255);
-    text("PLAYER BLUE CIRCLES: ",420,50);
-    text(BPcircles, 700, 50);
-    for(int i = 0; i < players.size(); i++)
+  }
+
+  Player p5 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+
+  for (int i = 0; i < players.size (); i++)
+  {
+    RedSq r1 = RedSqArr2[i];
+
+    if (p5.collisionCheck3(r1))
     {
-      BlueCir b1 = BlueCirArr[i];
-      
-      if(p4.collisionCheck2(b1))
-      {
-        background(0,0,255);
-        BPcircles=BPcircles+2;
-      }
+
+
+      RPsquares++;
     }
-    
-    Player p5 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
-    
-    for(int i = 0; i < players.size(); i++)
+  }
+
+  Player p6 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
+
+  for (int i = 0; i < players.size (); i++)
+  {
+    RedCir rc = RedCirArr2[i];
+
+    if (p6.collisionCheck3(rc))
     {
-      RedSq r1 = RedSqArr2[i];
-      
-      if(p5.collisionCheck3(r1))
-      {
-        
-        
-        RPsquares++;
-      }
+      background(255, 0, 0);
+      RPcircles=RPcircles+2;
     }
-    
-    Player p6 = players.get(0); // DETECTING IT AGAINST THE RED PLAYER 
-  
-    for(int i = 0; i < players.size(); i++)
+  }
+
+  Player p7 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
+
+  for (int i = 0; i < players.size (); i++)
+  {
+    BlueCir bc = BlueCirArr2[i];
+
+    if (p7.collisionCheck3(bc))
     {
-      RedCir rc = RedCirArr2[i];
-      
-      if(p6.collisionCheck3(rc))
-      {
-        background(255,0,0);
-        RPcircles=RPcircles+2;
-      }
+      background(0, 0, 255);
+      BPcircles=BPcircles+2;
     }
-    
-    Player p7 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
-    
-    for(int i = 0; i < players.size(); i++)
-    {
-      BlueCir bc = BlueCirArr2[i];
-      
-      if(p7.collisionCheck3(bc))
-      {
-        background(0,0,255);
-        BPcircles=BPcircles+2;
-      }
-    }
-    
+  }
+
   Player p8 = players.get(1); // DETECTING IT AGAINST THE BLUE PLAYER 
-    
-    for(int i = 0; i < players.size(); i++)
+
+  for (int i = 0; i < players.size (); i++)
+  {
+    BlueSq bs = BlueSqArr2[i];
+
+    if (p8.collisionCheck3(bs))
     {
-      BlueSq bs = BlueSqArr2[i];
-      
-      if(p8.collisionCheck3(bs))
-      {
-       
-        BPsquares++;
-      }
+
+      BPsquares++;
     }
-    
-    if(!player.isPlaying() )
-    {
-      int i = (int) random(0,songs.size());
-      player= songs.get(i).songs;
-      player.play();
-    }
-    
+  }
+
+  if (!player.isPlaying() )
+  {
+    int i = (int) random(0, songs.size());
+    player= songs.get(i).songs;
+    player.play();
+  }
+
   noStroke();
-  fill(255,10);
-  
+  fill(255, 10);
+
   //-------CIRCLE ------- BOUNCING BACKGROUND
   // Add the circles current speed to the circles location.
   Clocation.add(Cvelocity);
-  
+
   //X Co-ordinates 
   if ((Clocation.x > width) || (Clocation.x < 0)) 
   {
     Cvelocity.x = Cvelocity.x * -1;
   }
-  
+
   // Y Co ordinates 
   if ((Clocation.y > height) || (Clocation.y < 0)) 
   {
@@ -368,10 +364,10 @@ void draw()
   // Display circle at x location
   stroke(0);
   fill(175);
-  ellipse(Clocation.x,Clocation.y,50,50);
+  ellipse(Clocation.x, Clocation.y, 50, 50);
   noStroke();
-  fill(255,10);
-  
+  fill(255, 10);
+
   // Add the squares current speed to the sqaures location.
   Slocation.add(Svelocity);
 
@@ -390,72 +386,69 @@ void draw()
   // Display Sqaures at x location
   stroke(0);
   fill(175);
-  rect(Slocation.x,Slocation.y,50,50);
-  
+  rect(Slocation.x, Slocation.y, 50, 50);
+
   for (int j = 0; j < RedSqArr.length; j++) 
   {
     RedSqArr[j].falldown();
   }
-  
+
   for (int j = 0; j < RedSqArr2.length; j++) 
   {
     RedSqArr2[j].fallacross();
   }
-  
+
   for (int j = 0; j < BlueSqArr.length; j++) 
   {
     BlueSqArr[j].falldown();
   }
-  
+
   for (int j = 0; j < BlueSqArr2.length; j++) 
   {
     BlueSqArr2[j].fallacross();
   }
-  
+
   for (int j = 0; j < RedCirArr.length; j++) 
   {
     RedCirArr[j].falldown();
   }
-  
+
   for (int j = 0; j < RedCirArr2.length; j++) 
   {
     RedCirArr2[j].fallacross();
   }
-  
+
   for (int j = 0; j < BlueCirArr.length; j++) 
   {
     BlueCirArr[j].falldown();
   }
-  
+
   for (int j = 0; j < BlueCirArr2.length; j++) 
   {
     BlueCirArr2[j].fallacross();
   }
-  
 }
 
 void keyPressed()
 {
   keys[keyCode] = true;
-  
+
   if (key == 'P'||key=='p'&& key=='Q' || key=='q')
   {
     //SPLASH CONTROL
-     SpSwitch++;
-     RPcircles=0;
-      RPsquares=0;
+    SpSwitch++;
+    RPcircles=0;
+    RPsquares=0;
     //BLUE PLAYER SCORES 
-      BPsquares=0;
-      BPcircles=0;
-      help=0;
+    BPsquares=0;
+    BPcircles=0;
+    help=0;
   }
-  
+
   if (key == 'T'||key=='t')
   {
     help++;
   }
-  
-  
 }
 
 void keyReleased()
@@ -490,7 +483,7 @@ char buttonNameToKey(XML xml, String buttonName)
     return DOWN;
   }
   //.. Others to follow
-  return value.charAt(0);  
+  return value.charAt(0);
 }
 
 void setUpPlayerControllers()
@@ -499,47 +492,40 @@ void setUpPlayerControllers()
   XML[] children = xml.getChildren("player");
   int gap = width / (children.length + 1);
   int y=300;
-  
-  
-  for(int i = 0 ; i < children.length ; i ++)  
+
+
+  for (int i = 0; i < children.length; i ++)  
   {
     color c;
-    if(i==0)
+    if (i==0)
     { 
-      c=color(255,0,0);
-    }
-    else
+      c=color(255, 0, 0);
+    } else
     {
-      c=color(0,0,255);
+      c=color(0, 0, 255);
     }
-      
+
     XML playerXML = children[i];
     Player p = new Player(
-            i
-             , c
-            , playerXML);
+    i
+      , c
+      , playerXML);
     int x = (i + 1) * gap;
- 
 
-    
-    
-    if(i == 0)
+
+
+
+    if (i == 0)
     {
       players.add(p);
     }
-    if(i == 1)
+    if (i == 1)
     {
       players.add(p);
     }
-    
+
     p.pos.x = x;
     p.pos.y = y;
-    
+  }
 }
-
-}
- 
-  
-  
-  
 

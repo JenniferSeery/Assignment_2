@@ -11,12 +11,12 @@ class Player
   int index;
   color colour;
   PImage playerimage;
-    
+
   Player()
   {
     pos = new PVector(width / 2, height / 2);
   }
-  
+
   Player(int index, color colour, char up, char down, char left, char right, char start, char button1, char button2)
   {
     this();
@@ -30,94 +30,97 @@ class Player
     this.button1 = button1;
     this.button2 = button2;
   }
-  
+
   Player(int index, color colour, XML xml)
   {
     this(index
-        , colour
-        , buttonNameToKey(xml, "up")
-        , buttonNameToKey(xml, "down")
-        , buttonNameToKey(xml, "left")
-        , buttonNameToKey(xml, "right")
-        , buttonNameToKey(xml, "start")
-        , buttonNameToKey(xml, "button1")
-        , buttonNameToKey(xml, "button2")
-        );
+      , colour
+      , buttonNameToKey(xml, "up")
+      , buttonNameToKey(xml, "down")
+      , buttonNameToKey(xml, "left")
+      , buttonNameToKey(xml, "right")
+      , buttonNameToKey(xml, "start")
+      , buttonNameToKey(xml, "button1")
+      , buttonNameToKey(xml, "button2")
+      );
   } 
-  
+
+  // CHECKING COLLISION OF PLAYER WITH VERTICAL SQUARES
   boolean collisionCheck(RedSq r)
   {
-    if(pos.x - playerSize < r.RedSqx + 20 && pos.x + playerSize > r.RedSqx && pos.y - 50 < r.RedSqy + 20 && pos.y + playerSize > r.RedSqy)
+    if (pos.x - playerSize < r.RedSqx + 20 && pos.x + playerSize > r.RedSqx && pos.y - 50 < r.RedSqy + 20 && pos.y + playerSize > r.RedSqy)
     {
       return true;
     }
     return false;
   }
-  
+  //CHECKING COLLISION OF PLAYER WITH HORIZONTAL SQUARES
   boolean collisionCheck3(RedSq r1)
   {
-    if(RedSqx1>pos.x && RedSqx1 < pos.x+playerSize &&RedSqy1 > pos.y && RedSqy1 < pos.y+playerSize)
+    if (RedSqx1>pos.x && RedSqx1 < pos.x+playerSize &&RedSqy1 > pos.y && RedSqy1 < pos.y+playerSize)
     {
       return true;
     }
     return false;
   }
-  
+
+  //CHECKING COLLISION OF PLAYER WITH VERTICAL CIRCLE
   boolean collisionCheck(RedCir rc1)
   {
-    if(pos.x - playerSize< rc1.RedCirx + 20 && pos.x + playerSize > rc1.RedCirx && pos.y - playerSize < rc1.RedCiry + 20 && pos.y + playerSize > rc1.RedCiry)
+    if (pos.x - playerSize< rc1.RedCirx + 20 && pos.x + playerSize > rc1.RedCirx && pos.y - playerSize < rc1.RedCiry + 20 && pos.y + playerSize > rc1.RedCiry)
     {
       return true;
     }
     return false;
   }
-  
+
+  //CHECKING COLLISION OF PLAYER WITH HORIZONTAL CIRCLE
   boolean collisionCheck3(RedCir rc)
   {
-    if(RedCirx1>pos.x && RedCirx1 < pos.x+playerSize && RedCiry1 > pos.y && RedCiry1 < pos.y+playerSize)
+    if (RedCirx1>pos.x && RedCirx1 < pos.x+playerSize && RedCiry1 > pos.y && RedCiry1 < pos.y+playerSize)
     {
       return true;
     }
     return false;
   }
-  
+  //CHECKING COLLISION OF PLAYER WITH VERTICAL SQAURES
   boolean collisionCheck2(BlueSq b)
   {
-    if(pos.x - playerSize < b.x + 20 && pos.x + playerSize > b.x && pos.y - playerSize < b.y + 20 && pos.y + playerSize > b.y)
+    if (pos.x - playerSize < b.x + 20 && pos.x + playerSize > b.x && pos.y - playerSize < b.y + 20 && pos.y + playerSize > b.y)
     {
       return true;
     }
     return false;
   }
-  
+  //CHECKING COLLISION OF PLAYER WITH VERTICAL CIRCLE
   boolean collisionCheck2(BlueCir b1)
   {
-    if(pos.x - playerSize < b1.BlueCirx + 20 && pos.x + playerSize > b1.BlueCirx && pos.y - playerSize < b1.BlueCiry + 20 && pos.y + playerSize > b1.BlueCiry)
+    if (pos.x - playerSize < b1.BlueCirx + 20 && pos.x + playerSize > b1.BlueCirx && pos.y - playerSize < b1.BlueCiry + 20 && pos.y + playerSize > b1.BlueCiry)
     {
       return true;
     }
     return false;
   }
-  
+  //CHECKING COLLISION OF PLAYER WITH HORIZONTAL CIRCLE
   boolean collisionCheck3(BlueCir bc)
   {
-    if(BlueCirx1>pos.x && BlueCirx1 < pos.x+playerSize && BlueCiry1 > pos.y && BlueCiry1 < pos.y+playerSize)
+    if (BlueCirx1>pos.x && BlueCirx1 < pos.x+playerSize && BlueCiry1 > pos.y && BlueCiry1 < pos.y+playerSize)
     {
       return true;
     }
     return false;
   }
-  
+  //CHECKING COLLISION OF PLAYER WITH HORIZONTAL SQUARE
   boolean collisionCheck3(BlueSq bs)
   {
-    if(BlueSqx1>pos.x && BlueSqx1 < pos.x+playerSize && BlueSqy1 > pos.y && BlueSqy1 < pos.y+playerSize)
+    if (BlueSqx1>pos.x && BlueSqx1 < pos.x+playerSize && BlueSqy1 > pos.y && BlueSqy1 < pos.y+playerSize)
     {
       return true;
     }
     return false;
   }
-  
-  
+
+
   void update()
   {
     if (checkKey(up))
@@ -150,48 +153,44 @@ class Player
     }    
 
 
-  //EDITING THE PLAYERS SIZE WHEN IT GET TO A CERTAIN SCORE 
-  if(RPsquares > 500 && RPcircles>500)
-   {
-     image(RWin,0,60);
-   }
-   if(RPsquares > 250 && RPcircles>250)
-   {
-     playerSize=30;
-   }
-   
-  if(BPsquares > 250 && BPcircles>250)
-   {
-     playerSize=30;
-   }
-   
-   if(BPsquares >500 && BPcircles>500)
-   {
-     image(BWin,0,60);
-   }
-   
-   if(help==1)
-   {
-     image(instruct,0,60);
-   }
-   
-   
+    //EDITING THE PLAYERS SIZE WHEN IT GET TO A CERTAIN SCORE 
+    if (RPsquares > 500 && RPcircles>500)
+    {
+      image(RWin, 0, 60);
+    }
+    //RESIZING PLAYER
+    if (RPsquares > 250 && RPcircles>250)
+    {
+      playerSize=30;
+    }
 
-    
- 
+    //RESIZING PLAYER
+    if (BPsquares > 250 && BPcircles>250)
+    {
+      playerSize=30;
+    }
+
+    //BLUE PLAYER WINNING
+    if (BPsquares >500 && BPcircles>500)
+    {
+      image(BWin, 0, 60);
+    }
+
+    // INSTRUCTIONS 
+    if (help==1)
+    {
+      image(instruct, 0, 60);
+    }
   }
 
-  
-  
+
+
   void display()
   {    
     strokeWeight(4);
     stroke(255);
     fill(colour);  
-    rect(pos.x,pos.y,playerSize,playerSize);
-    }
+    rect(pos.x, pos.y, playerSize, playerSize);
+  }
 }  
- 
-  
-
 
