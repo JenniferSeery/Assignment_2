@@ -225,7 +225,7 @@ void draw()
       if(p.collisionCheck(r))
       {
                
-        println(RPsquares);
+        
         RPsquares++;
       }
     }
@@ -264,6 +264,7 @@ void draw()
       
       if(p3.collisionCheck(rc1))
       {
+        background(255,0,0);
         RPcircles=RPcircles+2;
       }
     }
@@ -280,6 +281,7 @@ void draw()
       
       if(p4.collisionCheck2(b1))
       {
+        background(0,0,255);
         BPcircles=BPcircles+2;
       }
     }
@@ -292,7 +294,8 @@ void draw()
       
       if(p5.collisionCheck3(r1))
       {
-        println(RPsquares);
+        
+        
         RPsquares++;
       }
     }
@@ -305,6 +308,7 @@ void draw()
       
       if(p6.collisionCheck3(rc))
       {
+        background(255,0,0);
         RPcircles=RPcircles+2;
       }
     }
@@ -317,6 +321,7 @@ void draw()
       
       if(p7.collisionCheck3(bc))
       {
+        background(0,0,255);
         BPcircles=BPcircles+2;
       }
     }
@@ -329,6 +334,7 @@ void draw()
       
       if(p8.collisionCheck3(bs))
       {
+       
         BPsquares++;
       }
     }
@@ -444,7 +450,7 @@ void keyPressed()
       help=0;
   }
   
-  if (key == 'I'||key=='i')
+  if (key == 'T'||key=='t')
   {
     help++;
   }

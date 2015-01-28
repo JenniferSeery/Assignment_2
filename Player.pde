@@ -155,6 +155,15 @@ class Player
    {
      image(RWin,0,60);
    }
+   if(RPsquares > 250 && RPcircles>250)
+   {
+     playerSize=30;
+   }
+   
+  if(BPsquares > 250 && BPcircles>250)
+   {
+     playerSize=30;
+   }
    
    if(BPsquares >500 && BPcircles>500)
    {
